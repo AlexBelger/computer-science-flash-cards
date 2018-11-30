@@ -31,7 +31,7 @@ if row == None:
 else:
     first_rowid = 0
 
-cur.executemany('INSERT INTO cards (type, front, back) VALUES (?, ?, ?)', to_db)
+cur.executemany("INSERT INTO cards (type, front, back) VALUES (?, ?,REPLACE(?,'\\n','\n'))", to_db)
 card_rowid = cur.lastrowid
 cur.execute('SELECT rowid FROM cards WHERE rowid >= ? ORDER BY rowid ASC', (first_rowid,))
 rows = cur.fetchall()
